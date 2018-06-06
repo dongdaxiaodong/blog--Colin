@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>start</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div id="index" class="movechange">
+                <label class="label label-info">主页</label>
+            </div>
+            <div id="for-writing" class="movechange" onclick="writeblog()">
+                <img src="../static/写.png" width="30" height="30">
+                <label>write something</label>
+            </div>
+            <div id="for-types">
+                <div id="type-title">
+                <label>my types</label><img src="../static/添加.png">
+                </div>
+                <div id="type-content">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div id="main-content">
+
+        </div>
+    </div>
+
+    </div></div>
+<script>
+    function writeblog(){
+        var contentdiv=document.getElementById('main-content')
+        var addcontent=""
+        addcontent+="<form role=\"form\">\n" +
+            "        <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"请输入标题\">\n" +
+            "    <textarea rows=\"20\" class=\"form-control\" id=\"textarea\"></textarea>\n" +
+            "    <div id=\"type-div\"></div>\n" +
+            "\n" +
+            "    <button type=\"submit\" class=\"btn btn-default\">提交</button>\n" +
+            "</form>"
+        contentdiv.innerHTML=addcontent
+        $ajax({
+            type: "GET",
+            url: 'http://127.0.0.1:5000/gettypes',
+            dataType: 'json',
+            data: {},
+            success: function(result){
+                var radiodiv=""
+                for(var i=0;i<result.length;i+=1){
+                    radiodiv+="<label><input type='radio' name='checkradio'></label>"
+                }
+                document.getElementById('type-content').innerHTML=radiodiv
+
+            }
+        })
+
+
+
+    }
+        function gettype(){
+        $.ajax({
+            type: "GET",
+            url: 'http://127.0.0.1:5000/gettypes',
+            dataType: 'json',
+            data: {},
+            success: function(result){
+                var radiodiv=""
+                for(var i=0;i<result.length;i+=1){
+                    radiodiv+="<div class='movechange'><img src='../static/分类.png'><label>"+result[i]+"</label></div><br>"
+                }
+                document.getElementById('type-content').innerHTML=radiodiv
+
+            }
+        });
+}
+function getsubmit(){
+    var title=document.getElementById('writing-title')
+    var content=document.getElementById('writing-content')
+    var writeradios=document.getElementsByName('type')
+    var checkradiovalue=null
+    for(var i=0;i<writeradios.length;i+=1){
+        if(writeradios[i].checked==true){
+            checkradiovalue=writeradios[i].value
+            break
+        }
+    }
+    if(title.value!="" && content.value!="" && checkradiovalue!=null){
+        updata={title:title,content:content,check:checkradiovalue}
+        $.ajax({
+            type:"GET",
+            url:"http://127.0.0.1:5000/upload",
+            data:updata,
+            success:function(){
+
+            }
+        })
+    }
+}
+
+        gettype()
+
+    </script>
+</body>
+</html>

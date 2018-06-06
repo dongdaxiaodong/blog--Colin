@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>startit</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #span-type{
+            margin-top: 50px;
+
+        }
+        h2{
+            color: wheat;
+    text-align: center;
+        }
+        #bg{
+            background-image:url("../static/bg.jpg");
+        }
+        .text-info {
+            color: papayawhip;
+                margin-top: 35px;
+}
+        h3{
+            font-size: 20px;
+            color: wheat;
+        }
+        p{
+            font-size: 12px;
+            color: white;
+        }
+        .typetitle{
+            margin-bottom: 10px;
+        }
+        label{
+            color: white;
+        }
+        .btn{
+
+            width: 100px;
+            height: 32px;
+            margin-top: 7px;
+            margin-bottom: 7px;
+        }
+        .index-div{
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .left {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+        body{
+            background-color: #454443;
+        }
+        span{
+            color: white;
+            background-color: #e0dedb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div id="homepage-div" class="index-div" onclick="indexagain()"><img src="../static/主页%20(2).png"><span class="label-default" style="color: white;background-color: #464544;font-size: 20px">主页</span></div>
+            <div id="writing-div" onclick="click_to_write()" class="left">
+                <img src="../static/写字%20(1).png"><span class="label-default" style="color: white;background-color: #464544;font-size: 20px">写博客</span></div>
+            <div id="types-div">
+                <div id="typetitle-div" class="typetitle">
+                    <span class="label-default" style="color: white;background-color: #464544;font-size: 20px">博客类型</span><br>
+                    <div id="typecontent-div">
+
+                </div>
+
+                </div>
+                <div class="left">
+                <img src="../static/添加%20(3).png"
+                data-toggle="modal" data-target="#addtype"><span class="label-default" style="color: white;background-color: #464544;font-size: 20px">添加类型</span>
+                </div>
+                 <div class="deletediv">
+                <img src="../static/删除.png"
+                data-toggle="modal" data-target="#deletetype"><span class="label-default" style="color: white;background-color: #464544;font-size: 20px">删除类型</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10" id="bg" style="height: 570px">
+            <div id="content">
+                <h2 class="index-h">Colin Zhang's blog </h2>
+                <p>i just want to submit my ideas my harvest and my passion of coding. </p>
+                <p>i hope that i can also tarck my step . and never give up . go ahead ,no matter </p>
+                <p> how difficult it is .</p>
+                <p>coding is my life and rachel is just like my lives .</p>
+                <p>one day , i will say 'you should remeber my last name \! maybe forever '</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deletetype" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<input placeholder="输入要删除类型名称" type="text" id="deleteinputtype" class="form-control">
+			</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="deletebutton" onclick="deletetype()" data-dismiss="modal">
+					确认删除
+				</button>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<div class="modal fade" id="addtype" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<input placeholder="输入新类型名称" type="text" id="addinput" class="form-control">
+			</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="addbutton" onclick="addtype()" data-dismiss="modal">
+					提交更改
+				</button>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<input placeholder="输入'delete'确认删除" type="text" id="deleteinput" class="form-control">
+			</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-danger" id="deletebutton" onclick="deletepage()" data-dismiss="modal">
+					确认删除?
+				</button>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<script type="text/template" id="change_page">
+    <input  class="form-control" readonly="readonly" id="change_title" style="text-align:center; margin: auto;margin-top: 80px;margin-bottom: 40px">
+    <textarea class="form-control" id="change_textarea" rows="18">changetextareachangetextarea</textarea>
+    <span class="label label-info">spanspanspan</span>
+    <button class="btn btn-success" onclick="submitchange()" id="change_button">提交</button>
+</script>
+<script type="text/template" id="specific_page">
+    <h1 class="text-info" id="check_h1" style="text-align: center;margin-top: 30px;margin-bottom: 30px">titlewillbereplace</h1>
+       <span class="label label-info" id="span-type">typewillbereplace</span>
+
+    <textarea disabled="disabled" readonly="readonly" class="form-control" cols="16" style="height: 400px">textareawillbereplace</textarea>
+    <button class="btn btn-primary" id="change_button" style="margin-right: 100px">编辑</button>
+    <button class="btn btn-danger" id="delete_button" data-toggle="modal" data-target="#delete">删除</button>
+</script>
+<script type="text/template" id="template_pages">
+    <h2 class="text-info text-center">titletitletitle</h2>
+    <div class="row">
+        <div class="col-md-12">
+            divdivdiv
+        </div>
+    </div>
+</script>
+<script type="text/">
+
+</script>
+<script type="text/template" id="template_write">
+<input type="text" placeholder="输入标题" class="form-control" id="title_write" style="width: 400px; text-align: center;margin: auto;margin-top: 50px;margin-bottom: 30px"><br>
+<textarea rows="18" class="form-control" id="content_write"></textarea>
+    <div id="forradios" style="color: white; margin: auto">replacebyradios</div>
+<button type="button" id="button_write" onclick="upload()" class="btn btn-default">提交</button>
+</script>
+<script>
+    function deletetype(){
+        var value=document.getElementById('deleteinputtype').value;
+        var buttons=document.getElementsByClassName('btn type_button typebutton')
+        var titlelist=[]
+        for(var i=0;i<buttons.length;i+=1){
+            titlelist.push(buttons[i].innerText)
+        }
+        if(titlelist.indexOf(value)>=0){
+            var alldata={
+                deletetype:JSON.stringify(value)
+            }
+            $.ajax({
+                type:"POST",
+            url:"http://127.0.0.1:5000/deletetype",
+            data:alldata,
+            async:false,
+            success:function(result){
+                    alert("删除成功")
+            }
+            })
+            indexagain()
+        }
+        else{
+            alert("类型输入不正确")
+        }
+    }
+    function indexagain(){
+        location.reload()
+    }
+    showtypes()
+    function submitchange(){
+        var title=document.getElementById('change_title').placeholder
+        var content=document.getElementById('change_textarea').value
+        var alldata={
+            titledata:JSON.stringify(title),
+            contentdata:JSON.stringify(content)
+        }
+        var resultlist=[]
+        $.ajax({
+            type:"POST",
+            url:"http://127.0.0.1:5000/changepage",
+            data:alldata,
+            async:false,
+            success:function(result){
+                alert("修改成功")
+                resultlist=result
+            }
+        })
+    }
+    function deletepage(){
+        var value=document.getElementById('deleteinput').value
+
+        if(value=='delete'){
+            var title=document.getElementById('check_h1').innerText
+            var alldata={
+            deletetitle:JSON.stringify(title)
+        }
+            $.ajax({
+            type:"POST",
+            url:"http://127.0.0.1:5000/deletepage",
+            data:alldata,
+            async:false,
+            success:function(result){
+                alert('删除成功')
+            }
+        })
+        }
+        else{
+            alert('确认删除请输入delete')
+        }
+    }
+    function showtypes(){
+        var typeslist=[]
+        $.ajax({
+            type: "GET",
+            url: 'http://127.0.0.1:5000/gettypes',
+            dataType: 'json',
+            data: {},
+            async:false,
+            success: function(result){
+                typeslist=result
+            }
+        })
+        var newtypes=""
+        for(var i=0;i<typeslist.length;i+=1){
+            var type_div=document.createElement('div')
+            var type_button=document.createElement('button')
+            type_button.className='btn type_button typebutton'
+            type_button.value=typeslist[i]
+
+            type_button.innerText=typeslist[i]
+            type_div.appendChild(type_button)
+            newtypes+=type_div.innerHTML+"<br>"
+        }
+        document.getElementById('typecontent-div').innerHTML=newtypes
+        var allbutton=document.getElementsByTagName('button')
+        var typebutton=[]
+        for(var i=0;i<allbutton.length;i+=1){
+            if(allbutton[i].attributes['class'].value.indexOf("typebutton")>0){
+                typebutton.push(allbutton[i])
+            }
+        }
+        for(var i=0;i<typebutton.length;i+=1){
+            (function(i){
+            typebutton[i].onclick=function () {
+                getpagesbytype(this)
+            }
+        })(i);
+        }
+
+    }
+    function getpagesbytype(that){
+        var title=that.value
+        var titlelist=getpagetitle(title)
+        var container=""
+        for(var i=0;i<titlelist.length;i+=1){
+            var div=document.createElement('div')
+            var newdiv="<div style='margin:auto;margin-top:15px;margin-bottom:15px;border:1px solid black'></div>"
+            div.innerHTML=newdiv
+            var h3=document.createElement('h3')
+            var replaceh="<h3 style='color:white'></h3>"
+            h3.innerHTML=replaceh
+            var p=document.createElement('p')
+            var replacep="<p style='color:#eee8e0'></p>"
+            p.innerHTML=replacep
+            var content=titlelist[i][1]
+            var outputcontent=(content.length>20)?content.substring(0,20)+"..."+titlelist[i][2]:content+"..."+titlelist[i][2]
+            p.innerText=outputcontent
+            h3.innerText=titlelist[i][0]
+            div.appendChild(h3)
+            div.appendChild(p)
+            container+=div.innerHTML
+        }
+        var oldtemplate=document.getElementById('template_pages').innerHTML
+        var newtemplate=oldtemplate.replace(/titletitletitle/i,title)
+        var newnewtemplate=newtemplate.replace(/divdivdiv/i,container)
+        document.getElementById('content').innerHTML=newnewtemplate
+        var plist=document.getElementsByTagName('h3')
+        for(var i=0;i<plist.length;i+=1){
+            (function(i){
+            plist[i].onclick=function () {
+                getspecificpage(this)
+            }
+        })(i);
+        }
+    }
+    function getspecificpage(that){
+        var title=that.innerText
+        var alldata={
+            titledata:JSON.stringify(title)
+        }
+        var resultlist=[]
+        $.ajax({
+            type:"POST",
+            url:"http://127.0.0.1:5000/returnpage",
+            data:alldata,
+            async:false,
+            success:function(result){
+                resultlist=result
+            }
+        })
+        var titile=resultlist[0]
+        var content=resultlist[1]
+        var type=resultlist[2]
+        var firsttemplate=document.getElementById('specific_page').innerHTML
+        var secondtemplate=firsttemplate.replace(/titlewillbereplace/i,title)
+        var thirdtemplate=secondtemplate.replace(/textareawillbereplace/i,content)
+        var fourthtemplate=thirdtemplate.replace(/typewillbereplace/i,type)
+        document.getElementById('content').innerHTML=fourthtemplate
+        var changebutton=document.getElementById('change_button')
+        changebutton.value=document.getElementById('check_h1').innerText
+
+        changebutton.onclick=function(){
+            changepage(this)
+        }
+    }
+    function changepage(that){
+        var title=that.value
+        var alldata={
+            titledata:JSON.stringify(title)
+        }
+        var resultlist=[]
+        $.ajax({
+            type:"POST",
+            url:"http://127.0.0.1:5000/returnpage",
+            data:alldata,
+            async:false,
+            success:function(result){
+                resultlist=result
+            }
+        })
+        var title=resultlist[0]
+        var content=resultlist[1]
+        var type=resultlist[2]
+        var firsttemplate=document.getElementById('change_page').innerHTML
+        var secondtemplate=firsttemplate.replace(/changetextareachangetextarea/i,content)
+        var thirdtemplate=secondtemplate.replace(/spanspanspan/i,type)
+        document.getElementById('content').innerHTML=thirdtemplate
+        document.getElementById('change_title').placeholder=title
+    }
+    function getpagetitle(title){
+        var titlelist=[]
+        var alldata={
+            titledata:JSON.stringify(title)
+        }
+        $.ajax({
+            type: "POST",
+            url: 'http://127.0.0.1:5000/returnpages',
+            dataType: 'json',
+            data: alldata,
+            async:false,
+            success: function(result){
+                titlelist=result
+            }
+        })
+        return titlelist
+
+    }
+    function addtype(){
+        var newtype=document.getElementById('addinput').value
+        var alldata={
+            adddata:JSON.stringify(newtype)
+        }
+        $.ajax({
+            type: "POST",
+            url: 'http://127.0.0.1:5000/addtypes',
+            dataType: 'json',
+            data: alldata,
+            async:false,
+            success: function(result){
+            }
+        })
+        showtypes()
+
+    }
+    function upload(){
+        var title=document.getElementById('title_write').value
+        var content=document.getElementById('content_write').value
+        var radios=document.getElementsByName('radio_write')
+        var radiovalue=""
+        for(var i=0;i<radios.length;i+=1){
+            if(radios[i].checked==true){
+                radiovalue=radios[i].value
+            }
+        }
+        if(title!="" && content!="" && radiovalue!=""){
+            var data={title:title,content:content,radiovalue:radiovalue}
+            uploadwriting(data)
+            alert("ok")
+        }
+        else{
+            alert("请将信息填写完整!")
+        }
+    }
+    function uploadwriting(data){
+        var alldata={
+            contentdata:JSON.stringify(data)
+        }
+        $.ajax({
+            type: "POST",
+            url: 'http://127.0.0.1:5000/upload',
+            dataType: 'json',
+            data: alldata,
+            async:false,
+            success: function(result){
+
+            }
+        })
+    }
+
+    function click_to_write(){
+        var title="<form role='form'><input type='text' class='form-control' placeholder='输入标题'>" +
+            "<textarea cols='10' class='form-control'></textarea>"
+        var namelist=types_from_ajax()
+        var div_radios=""
+        for(var i=0;i<namelist.length;i+=1){
+            var label=document.createElement('span')
+            label.innerText=namelist[i]
+            var radio =document.createElement('input')
+            radio.type='radio'
+            radio.name='radio_write'
+            radio.value=namelist[i]
+            label.appendChild(radio)
+            div_radios+=label.innerHTML
+        }
+        var oldtemplate=document.getElementById('template_write').innerHTML
+        var newtemplate=oldtemplate.replace(/replacebyradios/i,div_radios)
+        document.getElementById('content').innerHTML=newtemplate
+    }
+    function types_from_ajax(){
+        numlist=[]
+        $.ajax({
+            type: "GET",
+            url: 'http://127.0.0.1:5000/gettypes',
+            dataType: 'json',
+            data: {},
+            async:false,
+            success: function(result){
+                numlist=result
+            }
+        })
+        return numlist
+    }
+    </script>
+</body>
+</html>

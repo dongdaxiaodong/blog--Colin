@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>writing</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<input type="text" id="title" class="form-control" placeholder="输入标题">
+<textarea id="content" class="form-control" placeholder="输入内容"></textarea>
+<br>
+<form role="form">
+<div class="form-group" id="divforradio">
+
+</div>
+</form>
+<button type="button" class="btn btn-success"></button>
+<script>
+    $.ajax({
+            type: "GET",
+            url: 'http://127.0.0.1:5000/gettypes',
+            dataType: 'json',
+            data: {},
+            success: function(result){
+                var radiodiv=""
+                for(var i=0;i<result.length;i+=1){
+                    radiodiv+="<label class='radio-inline'><input type='radio' name='type'>"+result[i]+"</label>"
+                }
+                document.getElementById('divforradio').innerHTML=radiodiv
+            }
+        });
+
+
+    </script>
+</body>
+</html>
